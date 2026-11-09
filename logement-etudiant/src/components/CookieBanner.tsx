@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from './ui/Button'
 
@@ -7,14 +7,7 @@ const COOKIE_KEY = 'logement_etudiant_cookie_consent'
 type ConsentValue = 'accepted' | 'refused'
 
 export default function CookieBanner() {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const stored = localStorage.getItem(COOKIE_KEY)
-    if (!stored) {
-      setVisible(true)
-    }
-  }, [])
+  const [visible, setVisible] = useState(() => !localStorage.getItem(COOKIE_KEY))
 
   const handleChoice = (choice: ConsentValue) => {
     localStorage.setItem(COOKIE_KEY, choice)

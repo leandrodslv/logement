@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Building2 } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import { Avatar } from './ui/Avatar'
 import { Badge } from './ui/Badge'
@@ -82,7 +83,7 @@ export default function Navbar() {
           aria-label="LogementÉtudiant — Accueil"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          <span className="text-[var(--accent)]" aria-hidden="true">🏠</span>
+          <Building2 size={20} className="text-[var(--accent)]" aria-hidden="true" />
           LogementÉtudiant
         </Link>
 
