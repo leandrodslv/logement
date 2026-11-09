@@ -13,6 +13,7 @@ import { StarRating } from '../components/StarRating'
 import { useAnnonce, useAnnonceSimilaires } from '../hooks/useAnnonces'
 import { useAuth } from '../hooks/useAuth'
 import { formatPrix } from '../lib/utils'
+import { MapBlock } from '../components/MapBlock'
 
 export default function AnnoncePage() {
   const { id } = useParams<{ id: string }>()
@@ -190,6 +191,13 @@ export default function AnnoncePage() {
               <p className="text-[var(--fg)] leading-relaxed whitespace-pre-line">{annonce.description}</p>
             </section>
           )}
+
+          {/* Carte */}
+          <MapBlock
+            adresse={annonce.adresse}
+            ville={annonce.ville}
+            codePostal={annonce.code_postal}
+          />
         </div>
 
         {/* Col droite : bailleur + contact */}

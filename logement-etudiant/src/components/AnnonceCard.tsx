@@ -18,9 +18,10 @@ const SOURCE_STYLES: Record<string, { label: string; color: string }> = {
 }
 
 function SourceBadge({ source }: { source: Annonce['source'] }) {
-  if (!source || source === 'direct') return null
+  if (!source) return null
   const s = SOURCE_STYLES[source]
   if (!s) return null
+  if (source === 'direct') return null
   return (
     <span
       className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold tracking-wide text-white"
