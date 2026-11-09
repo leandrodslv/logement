@@ -100,22 +100,27 @@ export default function Navbar() {
                 Messagerie
                 <UnreadBadge userId={profile?.id} />
               </NavLink>
-              <NavLink to={profilPath} className={navLinkClass}>Mon profil</NavLink>
-              <div className="flex items-center gap-3 pl-3 border-l border-[var(--border)]">
+              <Link
+                to={profilPath}
+                className="flex items-center gap-2 pl-3 border-l border-[var(--border)] hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)] rounded"
+                aria-label="Accéder à mon profil"
+              >
                 <Avatar
                   src={profile?.photo_url}
                   name={[profile?.prenom, profile?.nom].filter(Boolean).join(' ') || undefined}
                   size="sm"
                   alt={`Avatar de ${profile?.prenom ?? 'utilisateur'}`}
                 />
-                <span className="text-sm font-medium text-[var(--fg)]">
-                  {profile?.prenom ?? 'Utilisateur'}
-                </span>
-                <span className="text-xs text-[var(--muted)] capitalize">{profile?.role}</span>
-                <Button variant="ghost" size="sm" onClick={handleSignOut}>
-                  Déconnexion
-                </Button>
-              </div>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-sm font-semibold text-[var(--fg)]">
+                    {profile?.prenom ?? 'Utilisateur'}
+                  </span>
+                  <span className="text-[10px] text-[var(--muted)] capitalize">{profile?.role}</span>
+                </div>
+              </Link>
+              <Button variant="ghost" size="sm" onClick={handleSignOut}>
+                Déconnexion
+              </Button>
             </>
           ) : (
             <>
@@ -152,7 +157,12 @@ export default function Navbar() {
           aria-label="Menu de navigation mobile"
         >
           {isAuthenticated && (
-            <div className="flex items-center gap-3 pb-3 border-b border-[var(--border)]">
+            <Link
+              to={profilPath}
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-3 pb-3 border-b border-[var(--border)] hover:opacity-80 transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)] rounded"
+              aria-label="Accéder à mon profil"
+            >
               <Avatar
                 src={profile?.photo_url}
                 name={[profile?.prenom, profile?.nom].filter(Boolean).join(' ') || undefined}
@@ -163,7 +173,7 @@ export default function Navbar() {
                 <p className="text-sm font-semibold text-[var(--fg)]">{profile?.prenom} {profile?.nom}</p>
                 <p className="text-xs text-[var(--muted)] capitalize">{profile?.role}</p>
               </div>
-            </div>
+            </Link>
           )}
 
           <NavLink to="/annonces" className={navLinkClass} onClick={() => setMenuOpen(false)}>
@@ -179,9 +189,6 @@ export default function Navbar() {
               >
                 Messagerie
                 <UnreadBadge userId={profile?.id} />
-              </NavLink>
-              <NavLink to={profilPath} className={navLinkClass} onClick={() => setMenuOpen(false)}>
-                Mon profil
               </NavLink>
               <Button variant="ghost" size="sm" className="self-start mt-1" onClick={handleSignOut}>
                 Déconnexion
